@@ -3,6 +3,9 @@ source 'https://rubygems.org'
 gem 'thin'
 
 gem 'rails', '3.2.3'
+
+gem 'haml-rails'
+
 # Databases
 # Local: SQLite3
 # Heroku: Postgres
