@@ -1,4 +1,6 @@
 Repos::Application.routes.draw do
+  Mercury::Engine.routes
+
   devise_for :users
 
   get "repo" => "repo#index"
