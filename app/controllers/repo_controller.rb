@@ -17,11 +17,12 @@ class RepoController < ApplicationController
 
   def add_repo
     url = params[:url]
-    repo = Repo.new
 
     ident = url.gsub("https://github.com/", "").strip
-    repo.owner = ident.split("/")[0]
-    repo.name = ident.split("/")[1]
+    owner = ident.split("/")[0]
+    name = ident.split("/")[1]
+
+    repo = Repo.find_or_initialize_by_owner_and_name(owner, name)
 
     respond_to do |format|
       if repo.initialize_repo
