@@ -1,5 +1,9 @@
 Repos Index
 
+- if notice
+	%p #{notice}
 
 - @repos.each do |repo|
-	%span= repo.name
+	%div= repo.name
+
+= debug @repos

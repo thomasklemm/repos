@@ -1,15 +1,14 @@
 Repos::Application.routes.draw do
-  get "repo/index"
+  get "repo" => "repo#index"
+  get "repo/" => "repo#index", :as => :repo
+  get "repo/index" => "repo#index"
 
-  get "repo/show"
+  get 'repo/:owner/:name' => 'repo#show'
 
-  get "repo/create"
+  get 'repo/:owner/:name/edit' => 'repo#edit'
 
-  get "repo/edit"
+  get 'repo/add' => 'repo#add_repo'
 
-  get "repo/update"
-
-  get "repo/destroy"
 
   # The priority is based upon order of creation:
   # first created -> highest priority.
@@ -61,6 +60,7 @@ Repos::Application.routes.draw do
   # You can have the root of your site routed with "root"
   # just remember to delete public/index.html.
   # root :to => 'welcome#index'
+  root :to => 'repo#index'
 
   # See how all your routes lay out with "rake routes"
 

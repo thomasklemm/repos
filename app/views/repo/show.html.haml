@@ -1,2 +1,7 @@
 %h1 Repo#show
 %p Find me in app/views/repo/show.html.haml
+
+-if notice
+	%p #{notice}
+
+= debug @repo
