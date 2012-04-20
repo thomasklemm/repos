@@ -6,6 +6,8 @@ gem 'rails', '3.2.3'
 
 gem 'haml-rails'
 
+gem 'curb'
+
 # Databases
 # Local: SQLite3
 # Heroku: Postgres
