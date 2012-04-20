@@ -1,3 +1,18 @@
 %h1 Repo#show
 
-= debug @repo
+- repo = @repo
+.repo
+
+	%span.owner= 		repo.owner
+	\ /
+	%span.name= 		repo.name
+	%span.description= 	repo.description
+	%span.watchers= 	repo.watchers
+	%span.forks= 		repo.forks
+	%span.github_url=  	repo.github_url
+	%span.homepage=     repo.homepage
+	%span.wiki_text= 	repo.wiki_text
+
+%a(href="/editor/repo/#{repo.owner}/#{repo.name}") Edit this repos wiki_text
+
+= link_to "Home", :root

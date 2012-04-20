@@ -1,12 +1,11 @@
 %p Repos Index
 
 - @repos.each do |repo|
-	= debug repo
-
-- @repos.each do |repo|
 	.repo
-		%span.owner= 		repo.owner
-		%span.name= 		repo.name
+		%a(href="/repo/#{repo.owner}/#{repo.name}")
+			%span.owner= 		repo.owner
+			\ /
+			%span.name= 		repo.name
 		%span.description= 	repo.description
 		%span.watchers= 	repo.watchers
 		%span.forks= 		repo.forks
@@ -15,7 +14,7 @@
 		%span.wiki_text= 	repo.wiki_text
 
 
-%p Repos can be added using this very special bookmarklet (best draw it to your browser's bookmark bar)
+%p Repos can be added using this very special bookmarklet (best draw it to your browser's bookmarks bar)
 
 #bookmarket
 	%a.button(href="javascript: open('http://localhost:3000/repo/add?url=' + location.href)") Post to repos
