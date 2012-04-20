@@ -1,4 +1,6 @@
 Repos::Application.routes.draw do
+  devise_for :users
+
   get "repo" => "repo#index"
   get "repo/" => "repo#index", :as => :repo
   get "repo/index" => "repo#index"

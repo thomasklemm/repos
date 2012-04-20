@@ -48,6 +48,12 @@ Repos::Application.configure do
   # Precompile additional assets (application.js, application.css, and all non-JS/CSS are already added)
   # config.assets.precompile += %w( search.js )
 
+  # Devise requirement (added manually)
+  # If you are deploying Rails 3.1 on Heroku, you may want to set: config.assets.initialize_on_precompile = false
+  # On config/application.rb forcing your application to not access the DB
+  # or load models when precompiling your assets.
+  config.assets.initialize_on_precompile = false
+
   # Disable delivery errors, bad email addresses will be ignored
   # config.action_mailer.raise_delivery_errors = false
 

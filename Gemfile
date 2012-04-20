@@ -8,6 +8,8 @@ gem 'haml-rails'
 
 gem 'curb'
 
+gem 'mercury-rails'
+
 gem 'devise'
 
 # Databases
