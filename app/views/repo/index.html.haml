@@ -1,9 +1,12 @@
-Repos Index
+%p Repos Index
 
 - if notice
-	%p #{notice}
+	%p Notice: #{notice}
 
 - @repos.each do |repo|
-	%div= repo.name
+	= debug repo
 
-= debug @repos
+%p Repos can be added using this very special bookmarklet (best draw it to your browser's bookmark bar)
+
+#bookmarket
+	%a.button(href="javascript: open('http://localhost:3000/repo/add?url=' + location.href)") Post to repos
