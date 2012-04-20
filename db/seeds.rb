@@ -5,3 +5,5 @@
 #
 #   cities = City.create([{ name: 'Chicago' }, { name: 'Copenhagen' }])
 #   Mayor.create(name: 'Emanuel', city: cities.first)
+
+repos = Repo.create([{owner: "zurb", name: "foundation"}, {owner: "rails", name:"rails"}, {owner: "twitter", name:"bootstrap"}, {owner: "jashkenas", name:"coffee-script"}, {owner: "visionmedia", name: "express"}, {owner: "thomasklemm", name: "foundation"}])

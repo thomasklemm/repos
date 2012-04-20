@@ -1,2 +1,5 @@
-%h1 Repo#index
-%p Find me in app/views/repo/index.html.haml
+Repos Index
+
+
+- @repos.each do |repo|
+	%span= repo.name

@@ -9,6 +9,7 @@ class Repo < ActiveRecord::Base
 
 
   def update_repo
+    puts "starting to update_repo: #{self.owner}/#{self.name}"
     github = JSON.parse(Curl::Easy.perform("https://api.github.com/repos/" + self.owner + "/" + self.name).body_str)
     
     %w{name description watchers forks homepage}.each do |field|
