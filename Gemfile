@@ -8,6 +8,8 @@ gem 'haml-rails'
 
 gem 'curb'
 
+gem 'devise'
+
 # Databases
 # Local: SQLite3
 # Heroku: Postgres
