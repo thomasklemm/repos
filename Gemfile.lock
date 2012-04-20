@@ -82,6 +82,8 @@ GEM
       mime-types
     pg (0.13.2)
     polyglot (0.3.3)
+    quiet_assets (1.0.0)
+      rails (~> 3.1)
     rack (1.4.1)
     rack-cache (1.2)
       rack (>= 0.4)
@@ -145,6 +147,7 @@ DEPENDENCIES
   jquery-rails
   mercury-rails
   pg
+  quiet_assets
   rails (= 3.2.3)
   sass-rails (~> 3.2.3)
   sqlite3

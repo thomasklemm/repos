@@ -12,6 +12,8 @@ gem 'mercury-rails'
 
 gem 'devise'
 
+gem 'quiet_assets', :group => :development
+
 # Databases
 # Local: SQLite3
 # Heroku: Postgres

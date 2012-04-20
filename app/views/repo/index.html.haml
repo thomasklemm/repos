@@ -3,6 +3,18 @@
 - @repos.each do |repo|
 	= debug repo
 
+- @repos.each do |repo|
+	.repo
+		%span.owner= 		repo.owner
+		%span.name= 		repo.name
+		%span.description= 	repo.description
+		%span.watchers= 	repo.watchers
+		%span.forks= 		repo.forks
+		%span.github_url=  	repo.github_url
+		%span.homepage=     repo.homepage
+		%span.wiki_text= 	repo.wiki_text
+
+
 %p Repos can be added using this very special bookmarklet (best draw it to your browser's bookmark bar)
 
 #bookmarket

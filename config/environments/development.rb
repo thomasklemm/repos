@@ -37,4 +37,7 @@ Repos::Application.configure do
 
   # Devise requirement (added manually)
   config.action_mailer.default_url_options = { :host => 'localhost:3000' }
+
+  # Quiet assets
+  config.quiet_assets = true
 end
