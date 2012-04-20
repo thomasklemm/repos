@@ -1,4 +1,16 @@
 Repos::Application.routes.draw do
+  get "repo/index"
+
+  get "repo/show"
+
+  get "repo/create"
+
+  get "repo/edit"
+
+  get "repo/update"
+
+  get "repo/destroy"
+
   # The priority is based upon order of creation:
   # first created -> highest priority.
 
