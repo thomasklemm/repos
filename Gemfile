@@ -7,7 +7,7 @@ gem 'rails', '3.2.3'
 gem 'haml-rails'
 
 gem 'curb'
-
+gem "coffee-script-source", "1.2.0"
 gem 'mercury-rails'
 
 gem 'devise'
