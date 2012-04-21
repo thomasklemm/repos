@@ -9,7 +9,7 @@ class RepoController < ApplicationController
 
   def show
     @repo = Repo.find_by_owner_and_name(params[:owner], params[:name])
-
+    
     respond_to do |format|
       format.html #show.html.haml
     end

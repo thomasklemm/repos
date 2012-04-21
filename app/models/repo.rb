@@ -3,8 +3,6 @@ class Repo < ActiveRecord::Base
 
   validates :owner, :name, presence: true
 
-  attr_taggable :languages, :frameworks, :solutions
-
   def ident
     return "#{self.owner}/#{self.name}"
   end
