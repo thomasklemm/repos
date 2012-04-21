@@ -385,6 +385,7 @@ window.Mercury = {
   // place to add or change functionality.
   onload: function() {
     //Mercury.PageEditor.prototype.iframeSrc = function(url) { return '/testing'; }
+    
     // Redirect on 'saved' event
     Mercury.on('saved', function() {
         window.location.href = window.location.href.replace(/\/editor\//i, '/');
