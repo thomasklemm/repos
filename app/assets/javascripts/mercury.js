@@ -386,6 +386,16 @@ window.Mercury = {
   onload: function() {
     //Mercury.PageEditor.prototype.iframeSrc = function(url) { return '/testing'; }
     
+    Mercury.on('ready', function() {
+        var link = $('#mercury_iframe').contents().find('#edit_link');
+        // link.hide();
+        // Change link text
+        link.contents().contents().replaceWith("Save wiki_text");
+        link.click(function(event) {
+            event.preventDefault();
+            page_editor.save();
+        });
+    });
     // Redirect on 'saved' event
     Mercury.on('saved', function() {
         window.location.href = window.location.href.replace(/\/editor\//i, '/');
