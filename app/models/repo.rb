@@ -1,11 +1,9 @@
 class Repo < ActiveRecord::Base
-  attr_accessible :description, :forks, :homepage, :github_url, :last_updated, :name, :owner, :watchers
+  attr_accessible :owner, :name, :description, :github_url, :homepage, :forks, :watchers, :last_updated
 
   validates :owner, :name, presence: true
 
-  before_save do |repo|
-
-  end
+  attr_taggable :languages, :frameworks, :solutions
 
   def ident
     return "#{self.owner}/#{self.name}"
