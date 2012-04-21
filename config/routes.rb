@@ -3,16 +3,21 @@ Repos::Application.routes.draw do
 
   devise_for :users
 
+  # Index
   get "repo" => "repo#index"
   get "repo/" => "repo#index", :as => :repo
   get "repo/index" => "repo#index"
 
+  # Pretty URLs when showing repo
   get 'repo/:owner/:name' => 'repo#show'
-
-  get 'repo/:owner/:name/edit' => 'repo#edit'
-
+  # get 'repo/:id' => 'repo#show'
+  
+  # Add repo
   get 'repo/add' => 'repo#add_repo'
 
+  # Mercury
+  post 'repo/:owner/:name' => 'repo#mercury_update'
+  post 'repo/:owner/:name/' => 'repo#mercury_update'
 
   # The priority is based upon order of creation:
   # first created -> highest priority.

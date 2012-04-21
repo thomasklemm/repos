@@ -11,8 +11,10 @@
 	%span.forks= 		repo.forks
 	%span.github_url=  	repo.github_url
 	%span.homepage=     repo.homepage
-	%span.wiki_text= 	repo.wiki_text
+	%span.wiki_text(id="wiki_text_edit" class="mercury-region" data-type="editable")= strip_tags(repo.wiki_text)
 
-%a(href="/editor/repo/#{repo.owner}/#{repo.name}") Edit this repos wiki_text
+= link_to "Edit wiki_text of this repo", "/editor" + request.path
+
+= link_to "Back to repo", request.path
 
 = link_to "Home", :root

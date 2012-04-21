@@ -29,7 +29,7 @@
  *
  * You can include the Rails jQuery ujs script here to get some nicer behaviors in modals, panels and lightviews when
  * using :remote => true within the contents rendered in them.
- * require jquery_ujs
+ *= require jquery_ujs
  *
  * If you want to override Mercury functionality, you can do so in a custom file that binds to the mercury:loaded event,
  * or do so at the end of the current file (mercury.js).  There's an example that will help you get started.
@@ -353,9 +353,9 @@ window.Mercury = {
     // button, or manually with `Mercury.trigger('action', {action: 'barrelRoll'})`
     globalBehaviors: {
       exit: function() { window.location.href = this.iframeSrc() },
-      barrelRoll: function() { $('body').css({webkitTransform: 'rotate(360deg)'}) }
-      },
-
+      barrelRoll: function() { $('body').css({webkitTransform: 'rotate(360deg)'}) },
+      saved: function() { window.location = window.location.href.replace(/\/editor\//i, '/');}
+    },
 
     // ## Ajax and CSRF Headers
     //
@@ -463,13 +463,19 @@ window.Mercury = {
   // ## Debug Mode
   //
   // Turning debug mode on will log events and other various things (using console.debug if available).
-  debug: false,
+  debug: true,
 
   // The onload method is provided as a callback in case you want to override default Mercury Editor behavior.  It will
   // be called directly after the Mercury scripts have loaded, but before anything has been initialized.  It's a good
   // place to add or change functionality.
   onload: function() {
     //Mercury.PageEditor.prototype.iframeSrc = function(url) { return '/testing'; }
-  },
+    // Redirect on 'saved' event
+    Mercury.on('saved', function() {
+        window.location.href = window.location.href.replace(/\/editor\//i, '/');
+      });
+  }
 
 };
+
+ 

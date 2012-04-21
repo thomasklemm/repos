@@ -26,11 +26,23 @@ class RepoController < ApplicationController
 
     respond_to do |format|
       if repo.initialize_repo
-        format.html { redirect_to "/repo/#{repo.owner}/#{repo.name}/", notice: "Repo successfully added." }
+        format.html { redirect_to "/repo/#{repo.owner}/#{repo.name}/", notice: "Repo added." }
       else
         format.html { redirect_to :root, notice: "Repo not found on github."}
       end
     end
+  end
+
+  def mercury_update
+    repo = Repo.find_by_owner_and_name(params[:owner], params[:name])
+    wiki_text_new = JSON.parse(params["content"])["wiki_text_edit"]["value"]
+
+    puts "New wiki_text for #{repo.ident}: '#{wiki_text_new.inspect}'"
+    repo.wiki_text = wiki_text_new
+
+    repo.save
+
+    render text: "{}"
   end
 
   def create

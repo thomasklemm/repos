@@ -7,6 +7,9 @@ class Repo < ActiveRecord::Base
 
   end
 
+  def ident
+    return "#{self.owner}/#{self.name}"
+  end
 
   def update_repo
     puts "starting to update_repo: #{self.owner}/#{self.name}"
