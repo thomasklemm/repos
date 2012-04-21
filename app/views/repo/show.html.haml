@@ -2,7 +2,7 @@
 
 - repo = @repo
 .repo
-
+	-# github
 	%span.owner= 		repo.owner
 	\ /
 	%span.name= 		repo.name
@@ -12,11 +12,13 @@
 	%span.github_url=  	repo.github_url
 	%span.homepage=     repo.homepage
 
-	%span.tags=         repo.languages
 
+	-# tags
+
+	-# wiki_text
 	%span.wiki_text(id="wiki_text_edit" class="mercury-region" data-type="editable")!= repo.wiki_text
 	%span.edit_link= link_to "Edit", "/editor" + request.path
 
+-# Links
 = link_to "Back to repo", request.path
-
 = link_to "Home", :root
