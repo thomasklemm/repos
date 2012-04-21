@@ -12,8 +12,6 @@ gem 'mercury-rails'
 
 gem 'quiet_assets', :group => :development
 
-gem 'rocket_tag'
-
 # Databases
 # Local: SQLite3
 # Heroku: Postgres
