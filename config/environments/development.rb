@@ -40,4 +40,3 @@ Repos::Application.configure do
 
   # Quiet assets
   config.quiet_assets = true
-end
