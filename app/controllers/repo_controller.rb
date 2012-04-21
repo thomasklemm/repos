@@ -26,7 +26,7 @@ class RepoController < ApplicationController
 
     respond_to do |format|
       if repo.initialize_repo
-        format.html { redirect_to "/repo/#{repo.owner}/#{repo.name}/", notice: "Repo added." }
+        format.html { redirect_to "/repo/#{repo.ident}/", notice: "Repo added." }
       else
         format.html { redirect_to :root, notice: "Repo not found on github."}
       end

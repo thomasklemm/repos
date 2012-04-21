@@ -12,8 +12,7 @@
 	%span.github_url=  	repo.github_url
 	%span.homepage=     repo.homepage
 	%span.wiki_text(id="wiki_text_edit" class="mercury-region" data-type="editable")= strip_tags(repo.wiki_text)
-
-= link_to "Edit wiki_text of this repo", "/editor" + request.path
+	%span.edit_link= link_to "Edit", "/editor" + request.path
 
 = link_to "Back to repo", request.path
 

@@ -12,7 +12,7 @@ class Repo < ActiveRecord::Base
   end
 
   def update_repo
-    puts "starting to update_repo: #{self.owner}/#{self.name}"
+    puts "starting to update_repo: '#{self.ident}'"
     github = JSON.parse(Curl::Easy.perform("https://api.github.com/repos/" + self.owner + "/" + self.name).body_str)
     
     if github["message"]
@@ -31,7 +31,7 @@ class Repo < ActiveRecord::Base
 
 
   def initialize_repo
-    puts "initialize_repo: #{self.owner}/#{self.name} finished successfully."
+    puts "initialize_repo: '#{self.ident}' finished successfully."
     self.update_repo 
   end
 
