@@ -10,8 +10,6 @@ gem 'curb'
 gem "coffee-script-source", "1.2.0"
 gem 'mercury-rails'
 
-gem 'devise'
-
 gem 'quiet_assets', :group => :development
 
 # Databases
