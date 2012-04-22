@@ -2,9 +2,21 @@
 # All this logic will automatically be available in application.js.
 # You can use CoffeeScript in this file: http://jashkenas.github.com/coffee-script/
 
-$ ->
-	$('#tags_languages').tagit
-		itemName: "tags"
-		fieldname: "language"
+$(document).ready ->
+	$('input').tagit
 		caseSensitive: false
 		allowSpaces: true
+		placeholderText: "Add a language"
+###
+	$('#tags_frameworks').tagit
+		caseSensitive: false
+		allowSpaces: true
+		placeholderText: "Add a framework"
+
+	$('#tags_solutions').tagit
+		caseSensitive: false
+		allowSpaces: true
+		placeholderText: "Add a solution"
+
+	return
+###

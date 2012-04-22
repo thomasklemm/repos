@@ -35,14 +35,30 @@ class RepoController < ApplicationController
 
   def mercury_update
     repo = Repo.find_by_owner_and_name(params[:owner], params[:name])
-    wiki_text_new = JSON.parse(params["content"])["wiki_text_edit"]["value"]
+    
+    if params["content"]
+      #mercury update
+      wiki_text_new = JSON.parse(params["content"])["wiki_text_edit"]["value"]
 
-    puts "New wiki_text for #{repo.ident}: '#{wiki_text_new.inspect}'"
-    repo.wiki_text = wiki_text_new
+      puts "New wiki_text for #{repo.ident}: '#{wiki_text_new.inspect}'"
+      repo.wiki_text = wiki_text_new
 
-    repo.save
+      repo.save
 
-    render text: "{}"
+      render text: "{}"
+    else
+      # post request containing tags in body
+      %w{languages frameworks solutions}.each do |context|
+        puts _taggings = params[context].split(",")
+        tag_values = []
+        _taggings.each do |value|
+          tag_values.push value.strip
+        end
+        repo.update_attribute(context, tag_values)
+      end
+
+
+    end
   end
 
   def create

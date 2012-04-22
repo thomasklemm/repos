@@ -25,7 +25,7 @@ group :production do
 end
 
 
-gem 'rocket_tag'
+gem 'rocket_tag', 'https://github.com/bradphelan/rocket_tag.git'
 
 # Gems used only for assets and not required
 # in production environments by default.
