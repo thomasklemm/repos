@@ -3,4 +3,8 @@
 # You can use CoffeeScript in this file: http://jashkenas.github.com/coffee-script/
 
 $ ->
-	$('input.tag').tagedit()
+	$('#tags_languages').tagit
+		itemName: "tags"
+		fieldname: "language"
+		caseSensitive: false
+		allowSpaces: true

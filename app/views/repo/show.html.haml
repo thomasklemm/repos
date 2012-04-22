@@ -13,6 +13,10 @@
 	%span.homepage=     repo.homepage
 
 	-# tags
+	%span.tags
+		%form(action="#" method="post")
+			%input#tags_languages(type="text" name="languages")
+			%button(type="submit") Senden
 
 	-# wiki_text
 	%span.wiki_text(id="wiki_text_edit" class="mercury-region" data-type="editable")!= repo.wiki_text
