@@ -2,9 +2,7 @@ Repos::Application.routes.draw do
   Mercury::Engine.routes
 
   # Index
-  get "repo" => "repo#index"
-  get "repo/" => "repo#index", :as => :repo
-  get "repo/index" => "repo#index"
+  get "repo" => "repo#index", :as => :repo
 
   # Pretty URLs when showing repo
   get 'repo/:owner/:name' => 'repo#show'
@@ -14,8 +12,7 @@ Repos::Application.routes.draw do
   get 'repo/add' => 'repo#add_repo'
 
   # Mercury
-  post 'repo/:owner/:name' => 'repo#mercury_update'
-  post 'repo/:owner/:name/' => 'repo#mercury_update'
+  post 'repo/:owner/:name' => 'repo#mercury_and_tags_update'
 
   # The priority is based upon order of creation:
   # first created -> highest priority.

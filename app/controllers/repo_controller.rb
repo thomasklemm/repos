@@ -33,7 +33,7 @@ class RepoController < ApplicationController
     end
   end
 
-  def mercury_update
+  def mercury_and_tags_update
     repo = Repo.find_by_owner_and_name(params[:owner], params[:name])
     
     if params["content"]
