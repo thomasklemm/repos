@@ -1,3 +1,11 @@
+GIT
+  remote: git://github.com/bradphelan/rocket_tag.git
+  revision: 0d85ea6782eb3360ce3cddf08701b420cf9f6ebf
+  specs:
+    rocket_tag (0.3.1)
+      activerecord (>= 3.2.0)
+      squeel
+
 GEM
   remote: https://rubygems.org/
   specs:
@@ -104,9 +112,6 @@ GEM
     rake (0.9.2.2)
     rdoc (3.12)
       json (~> 1.4)
-    rocket_tag (0.3.1)
-      activerecord (>= 3.2.0)
-      squeel
     sass (3.1.15)
     sass-rails (3.2.5)
       railties (~> 3.2.0)
@@ -148,7 +153,7 @@ DEPENDENCIES
   pg
   quiet_assets
   rails (= 3.2.3)
-  rocket_tag
+  rocket_tag!
   sass-rails (~> 3.2.3)
   sqlite3
   thin
