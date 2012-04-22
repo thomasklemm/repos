@@ -3,10 +3,13 @@
 # You can use CoffeeScript in this file: http://jashkenas.github.com/coffee-script/
 
 $(document).ready ->
-	$('input').tagit
+	$(".tag_input").tagit
 		caseSensitive: false
 		allowSpaces: true
-		placeholderText: "Add a language"
+		placeholderText: "Add a tag"
+
+	
+
 ###
 	$('#tags_frameworks').tagit
 		caseSensitive: false

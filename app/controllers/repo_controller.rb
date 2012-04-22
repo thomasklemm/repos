@@ -49,12 +49,18 @@ class RepoController < ApplicationController
     else
       # post request containing tags in body
       %w{languages frameworks solutions}.each do |context|
-        puts _taggings = params[context].split(",")
+        t1 = params[context]
+        t1 = t1.split(",")
         tag_values = []
-        _taggings.each do |value|
-          tag_values.push value.strip
+        t1.each do |value|
+          value = value.strip
+          tag_values << value
         end
         repo.update_attribute(context, tag_values)
+      end
+
+      respond_to do |format|
+        format.html { redirect_to "/repo/#{repo.ident}", notice: "Tags saved." }
       end
 
 

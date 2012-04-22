@@ -15,9 +15,9 @@
 	-# tags
 	%span.tags
 		%form(action="#" method="post")
-			%input#tags_languages(type="text" name="languages")
-			%input#tags_frameworks(type="text" name="frameworks")
-			%input#tags_solutions(type="text" name="solutions")
+			%input#tags_languages.tag_input(type="text" name="languages" value="#{repo.languages.join(',')}")
+			%input#tags_frameworks.tag_input(type="text" name="frameworks" value="#{repo.frameworks.join(',')}")
+			%input#tags_solutions.tag_input(type="text" name="solutions" value="#{repo.solutions.join(',')}")
 			%button(type="submit") Senden
 
 	-# wiki_text
