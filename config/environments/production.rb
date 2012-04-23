@@ -17,7 +17,7 @@ Repos::Application.configure do
   # ### Thomas added this line
   # accoring to http://stackoverflow.com/questions/7134034/using-rails-3-1-assets-pipeline-to-conditionally-use-certain-css
   # maybe it referred only to rails 3.1, there was no such option listed here before
-  # config.assets.precompile += %w(application-all.js)
+  config.assets.precompile += %w(application-all.js)
 
   # Don't fallback to assets pipeline if a precompiled asset is missed
   config.assets.compile = false
