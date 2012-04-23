@@ -37,9 +37,15 @@ class Repo < ActiveRecord::Base
       # => then jump to the next repo
       # => might be done using 'markable' gem
     else
-      %w{name description watchers forks homepage}.each do |field|
-        self[field] = github[field]
+      %w{name description homepage}.each do |field|
+        # set field or fall back to defaults
+        self[field] = github[field] || ""
       end
+      %w{watchers forks}.each do |field|
+        # set field or fall back to defaults
+        self[field] = github[field] || 0
+      end
+
       self["github_url"] = github["html_url"]
       self["owner"] = github["owner"]["login"]
       self["last_updated"] = github["updated_at"]

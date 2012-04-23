@@ -12,7 +12,8 @@
 		-# @repos.each
 		- @repos.each do |repo|
 			-# repo
-			%li
+			-# filtrify tags in data-attributes
+			%li(data-languages="#{tag_list(repo.languages)}" data-frameworks="#{tag_list(repo.frameworks)}" data-solutions="#{tag_list(repo.solutions)}")
 				-# owner and name
 				%a(href="/repo/#{repo.ident}")
 					%span.owner= repo.owner
@@ -28,7 +29,7 @@
 
 				-# links (github_url and homepage (if available))
 				%a.github_url(href="#{repo.github_url}") Github &rarr;
-				%a.homepage(href="#{homepage_with_fallback_github_url(repo.homepage, repo.github_url)}" style="#{display_homepage?(repo.homepage)}") Homepage &rarr;
+				%a.homepage(href="#{homepage_with_fallback_github_url(repo.homepage, repo.github_url)}" style="#{display_homepage?(repo.homepage, repo.github_url)}") Homepage &rarr;
 				-# do later: text homepage durch url ersetzen (evtl. problematisch bei github unterseiten mit langen links)
 
 				-# wiki_text
