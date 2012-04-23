@@ -1,5 +1,8 @@
 %p Repos Index
 
+-# filtrify placeholder
+#filtrifyPlaceHolder
+
 #repos-list
 	
 	-# list.js search and sort
@@ -8,7 +11,7 @@
 	%span.sort(data-sort="watchers") Sort by watchers
 	
 	-# list.js ul
-	%ul.list
+	%ul.list#filtrifyContainer
 		-# @repos.each
 		- @repos.each do |repo|
 			-# repo

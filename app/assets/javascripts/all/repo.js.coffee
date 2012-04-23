@@ -62,4 +62,11 @@ $(document).ready ->
 
 	repoList = new List('repos-list', list_options)
 
+
+	###
+		Section: filtrify.js
+	###
+
+	$.filtrify("filtrifyContainer", "filtrifyPlaceHolder")
+
 	return true
