@@ -69,9 +69,6 @@ $(document).ready ->
 
 	ft = $.filtrify("filtrifyContainer", "filtrifyPlaceHolder")
 
-	$('#ft_reset').click ->
-		ft.reset()
-
 	contexts = ["languages", "frameworks", "solutions"]
 	for context in contexts
 		for tag, count of ft._fields[context]
@@ -84,7 +81,7 @@ $(document).ready ->
 		frameworks: []
 		solutions: []
 
-	$('.tag_unselected').live "click",  ->
+	$('.tag_unselected').live "click", ->
 		tag = $(this).attr('data-tag')
 		# needs to be read new, somehow otherwise stuck to the last item in contexts
 		context = $(this).attr('data-context')
@@ -96,15 +93,17 @@ $(document).ready ->
 		# trigger filtrify query
 		ft.trigger query
 
-	$(".tag_selected").live "click",  ->
+	$(".tag_selected").live "click", ->
 		tag = $(this).attr('data-tag')
 		context = $(this).attr('data-context')
 		$(this).removeClass("tag_selected")
 		$(this).addClass("tag_unselected")
 		tag_index = query[context].indexOf tag
 		test = query[context].splice(tag_index, tag_index + 1)
-		console.log query
-		console.log test
 		ft.trigger query
+
+	$('#ft_reset').live "click", ->
+		$('.tag_selected').trigger("click")
+		ft.reset()
 
 	return true
