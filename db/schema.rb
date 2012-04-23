@@ -11,7 +11,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20120421140845) do
+ActiveRecord::Schema.define(:version => 20120423125330) do
 
   create_table "mercury_images", :force => true do |t|
     t.string   "image_file_name"
@@ -23,17 +23,17 @@ ActiveRecord::Schema.define(:version => 20120421140845) do
   end
 
   create_table "repos", :force => true do |t|
-    t.string   "name"
-    t.string   "owner"
-    t.text     "description"
-    t.integer  "watchers"
-    t.integer  "forks"
-    t.string   "github_url"
-    t.string   "homepage"
+    t.string   "name",         :default => ""
+    t.string   "owner",        :default => ""
+    t.text     "description",  :default => ""
+    t.integer  "watchers",     :default => 0
+    t.integer  "forks",        :default => 0
+    t.string   "github_url",   :default => ""
+    t.string   "homepage",     :default => ""
     t.datetime "last_updated"
-    t.datetime "created_at",                                        :null => false
-    t.datetime "updated_at",                                        :null => false
-    t.text     "wiki_text",    :default => "Placeholder Wiki-Text"
+    t.datetime "created_at",                   :null => false
+    t.datetime "updated_at",                   :null => false
+    t.text     "wiki_text",    :default => ""
   end
 
   create_table "taggings", :force => true do |t|
