@@ -3,6 +3,7 @@ Repos::Application.routes.draw do
 
   # Index
   get "repo" => "repo#index", :as => :repo
+  #, :name => /[^\/]*/
 
   # Pretty URLs when showing repo
   get 'repo/:owner/:name' => 'repo#show'
