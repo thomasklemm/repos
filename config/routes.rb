@@ -1,19 +1,38 @@
 Repos::Application.routes.draw do
+  
+  # mercury editor
+  # custom mercury controller to allow :name to have dots in it, explanation see below
+  match '/editor/repo/:owner/:name' => "my_mercury#edit", :as => :mercury_editor, :constraints => { :name => /[^\/]+(?=\.html\z|\.json\z)|[^\/]+/ }
   Mercury::Engine.routes
 
   # Index
   get "repo" => "repo#index", :as => :repo
-  #, :name => /[^\/]*/
 
-  # Pretty URLs when showing repo
-  get 'repo/:owner/:name' => 'repo#show'
+  # Show repo using pretty urls full of meaning
+  get 'repo/:owner/:name' => 'repo#show', :constraints => { :name => /[^\/]+(?=\.html\z|\.json\z)|[^\/]+/ }
   # get 'repo/:id' => 'repo#show'
-  
+
   # Add repo
   get 'repo/add' => 'repo#add_repo'
 
   # Mercury
-  post 'repo/:owner/:name' => 'repo#mercury_and_tags_update'
+  post 'repo/:owner/:name/' => 'repo#mercury_and_tags_update', :constraints => { :name => /[^\/]+(?=\.html\z|\.json\z)|[^\/]+/ }
+
+
+
+  # 'Repos' uses routes that might contain dots in name "eg. list.js, visibility.js ..."
+  # This needs special settings for every route that has the param :name in it
+
+  # Version 1:
+  # routing constraint setting allowing .js names among other "everything except '/' and .html and .json"
+  # :constraints => { :name => /[^\/]+(?=\.html\z|\.json\z)|[^\/]+/ }
+  # source: http://stackoverflow.com/questions/8059655/authentication-with-mercury-rails
+
+  # Version 2:
+  # name: /[^\/]+/
+  # takes everything except '/', source: Rails guides
+
+
 
   # The priority is based upon order of creation:
   # first created -> highest priority.
