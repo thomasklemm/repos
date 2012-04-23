@@ -1,11 +1,18 @@
 %p Repos Index
 
 #repos-list
+	
+	-# list.js search and sort
+	%input.search
+	%span.sort(data-sort="name") Sort by name
+	%span.sort(data-sort="watchers") Sort by watchers
+	
+	-# list.js ul
 	%ul.list
 		-# @repos.each
 		- @repos.each do |repo|
 			-# repo
-			%li.repo
+			%li
 				-# owner and name
 				%a(href="/repo/#{repo.ident}")
 					%span.owner= repo.owner
@@ -31,9 +38,6 @@
 
 				-# if interesting do later: aktivitätsanzeige
 				-# if interesting do later: watchers anzeige
-
-			%hr
-
 
 %p Repos can be added using this very special bookmarklet (best draw it to your browser's bookmarks bar)
 

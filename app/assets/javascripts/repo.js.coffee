@@ -4,6 +4,10 @@
 
 $(document).ready ->
 
+	###
+		Section: tag-it (tag inputs)
+	###
+
 	# Overall goal: show the tagit input field on click on edit
 
 	# click on tag_edit brings up tagit input field
@@ -49,23 +53,13 @@ $(document).ready ->
 		# set cursor somehow / set focus
 		# make textfield autogrow
 
+	###
+		Section: list.js
+	###
 
-###
-	$(".tag_input").tagit
-		caseSensitive: false
-		allowSpaces: true
-		placeholderText: "Add a tag"
-###
-###
-	$('#tags_frameworks').tagit
-		caseSensitive: false
-		allowSpaces: true
-		placeholderText: "Add a framework"
+	list_options =
+		valueNames: ['owner', 'name', 'description', 'watchers', 'forks', 'wiki_text']
 
-	$('#tags_solutions').tagit
-		caseSensitive: false
-		allowSpaces: true
-		placeholderText: "Add a solution"
+	repoList = new List('repos-list', list_options)
 
-	return
-###
+	return true
