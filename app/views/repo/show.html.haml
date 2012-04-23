@@ -15,10 +15,33 @@
 	-# tags
 	%span.tags
 		%form(action="#" method="post")
-			%input#tags_languages.tag_input(type="text" name="languages" value="#{repo.languages.join(',')}")
-			%input#tags_frameworks.tag_input(type="text" name="frameworks" value="#{repo.frameworks.join(',')}")
-			%input#tags_solutions.tag_input(type="text" name="solutions" value="#{repo.solutions.join(',')}")
-			%button(type="submit") Senden
+			.languages
+				%span Languages:
+				%span.tag_output #{repo.languages.join(" | ")}
+				%input#tags_languages.tag_input(type="text" name="languages" value="#{repo.languages.join(',')}" style="display:none")
+				
+				%span.tag_edit Edit
+				%span.tag_cancel(style='display:none') Cancel
+				%span.tag_save(style='display:none') Save
+
+			
+			.frameworks
+				%span Frameworks:
+				%span.tag_output #{repo.frameworks.join(" | ")}
+				%input#tags_frameworks.tag_input(type="text" name="frameworks" value="#{repo.frameworks.join(',')}" style="display:none")
+
+				%span.tag_edit Edit
+				%span.tag_cancel(style='display:none') Cancel
+				%span.tag_save(style='display:none') Save
+
+			.solutions
+				%span Solutions:
+				%span.tag_output #{repo.solutions.join(" | ")}
+				%input#tags_solutions.tag_input(type="text" name="solutions" value="#{repo.solutions.join(',')}" style="display:none")
+
+				%span.tag_edit Edit
+				%span.tag_cancel(style='display:none') Cancel
+				%span.tag_save(style='display:none') Save
 
 	-# wiki_text
 	%span.wiki_text(id="wiki_text_edit" class="mercury-region" data-type="editable")!= repo.wiki_text
