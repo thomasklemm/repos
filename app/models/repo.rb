@@ -69,5 +69,4 @@ class Repo < ActiveRecord::Base
     puts "Job 'Repo.update_repos' finished successfully."
   end
 
-
 end

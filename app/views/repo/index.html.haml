@@ -1,17 +1,38 @@
 %p Repos Index
 
-- @repos.each do |repo|
-	.repo
-		%a(href="/repo/#{repo.owner}/#{repo.name}")
-			%span.owner= 		repo.owner
-			\ /
-			%span.name= 		repo.name
-		%span.description= 	repo.description
-		%span.watchers= 	repo.watchers
-		%span.forks= 		repo.forks
-		%span.github_url=  	repo.github_url
-		%span.homepage=     repo.homepage
-		%span.wiki_text= 	repo.wiki_text
+#repos-list
+	%ul.list
+		-# @repos.each
+		- @repos.each do |repo|
+			-# repo
+			%li.repo
+				-# owner and name
+				%a(href="/repo/#{repo.ident}")
+					%span.owner= repo.owner
+					\ /
+					%span.name= repo.name
+
+				-# description
+				%p.description= repo.description
+
+				-# watchers and forks (not displayed, only for sorting purposes)
+				%p.watchers(style="display: none")= repo.watchers
+				%p.forks(style="display: none")= repo.forks
+
+				-# links (github_url and homepage (if available))
+				%a.github_url(href="#{repo.github_url}") Github &rarr;
+				%a.homepage(href="#{homepage_with_fallback_github_url(repo.homepage, repo.github_url)}" style="#{display_homepage?(repo.homepage)}") Homepage &rarr;
+				-# do later: text homepage durch url ersetzen (evtl. problematisch bei github unterseiten mit langen links)
+
+				-# wiki_text
+				-# do later: evtl. trunkieren oder gleich nur trunkierte version auslesen, die bei mercury update gespeichert und sanitized wird
+				-# darf keinerlei html tags mehr enthalten, für dem moment werden diese hier gestript
+				%p.wiki_text= strip_tags(repo.wiki_text)
+
+				-# if interesting do later: aktivitätsanzeige
+				-# if interesting do later: watchers anzeige
+
+			%hr
 
 
 %p Repos can be added using this very special bookmarklet (best draw it to your browser's bookmarks bar)
