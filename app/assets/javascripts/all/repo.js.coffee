@@ -53,20 +53,11 @@ $(document).ready ->
 		# set cursor somehow / set focus
 		# make textfield autogrow
 
-	###
-		Section: list.js
-	###
-
-	list_options =
-		valueNames: ['owner', 'name', 'description', 'watchers', 'forks', 'wiki_text']
-
-	repoList = new List('repos-list', list_options)
-
 
 	###
 		Section: filtrify.js
 	###
-
+	###
 	ft = $.filtrify("filtrifyContainer", "filtrifyPlaceHolder")
 
 	contexts = ["languages", "frameworks", "solutions"]
@@ -105,5 +96,18 @@ $(document).ready ->
 	$('#ft_reset').live "click", ->
 		$('.tag_selected').trigger("click")
 		ft.reset()
+	###
 
+	
+	###
+		Section: list.js
+	###
+
+	list_options =
+		valueNames: ['owner', 'name', 'description', 'watchers', 'forks', 'wiki_text']
+
+	repoList = new List('repos-list', list_options)
+
+
+	
 	return true

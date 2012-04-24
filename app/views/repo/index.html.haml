@@ -1,29 +1,24 @@
 %p Repos Index
 
-#tags
-	#tags_languages
-		%span Languages:&nbsp;
-	#tags_frameworks
-		%span Frameworks:&nbsp;
-	#tags_solutions
-		%span Solutions:&nbsp;
-
--# filtrify
-#filtrify
-	-# placeholder where filtrify controls will be injected
-	%span#filtrifyPlaceHolder
-	-# reset button
-	%span#ft_reset.panel Reset
-
 #repos-list
 	
 	-# list.js search and sort
-	%input.search
-	%span.sort(data-sort="name") Sort by name
-	%span.sort(data-sort="watchers") Sort by watchers
+	%input.search.input-text
+	%span Sort by
+	-# %span.sort.button(data-sort="name") name
+	%span.sort.button(data-sort="watchers")watchers
 	
+	-# tag controls
+	#tags
+		#tags_languages
+			%span Languages:&nbsp;
+		#tags_frameworks
+			%span Frameworks:&nbsp;
+		#tags_solutions
+			%span Solutions:&nbsp;
+
 	-# list.js ul
-	%ul.list#filtrifyContainer
+	%ul.list
 		-# @repos.each
 		- @repos.each do |repo|
 			-# repo
