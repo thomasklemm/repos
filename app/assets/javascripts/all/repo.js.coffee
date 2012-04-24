@@ -110,7 +110,7 @@ $(document).ready ->
 
 	
 	filter_list =
-		"languages": ["ruby", "not:js"]
+		"languages": ["js", "ruby"]
 		"frameworks": []
 		"solutions": []
 
@@ -119,9 +119,7 @@ $(document).ready ->
 			for tag in tag_list
 				do (tag) ->
 					repoList.filter (item) ->
-						# console.log item.name
-						# console.log context
-						# console.log tag
+	
 						unless item[context].indexOf(tag) is -1
 							return true
 						else
