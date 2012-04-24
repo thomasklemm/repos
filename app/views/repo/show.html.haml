@@ -47,6 +47,16 @@
 	%span.wiki_text(id="wiki_text_edit" class="mercury-region" data-type="editable")!= repo.wiki_text
 	%span#edit_link= link_to "Edit", "/editor" + request.path
 
+-# Repos tagged similarly
+
+%p These repos are tagged similarly:
+	
+- @similar_repos.each do |repo|
+	%hr
+	= debug repo
+	
+
+
 -# Links
 = link_to "Back to repo", request.path
 = link_to "Home", :root
