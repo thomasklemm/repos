@@ -98,16 +98,33 @@ $(document).ready ->
 		ft.reset()
 	###
 
-	
+
 	###
 		Section: list.js
 	###
 
 	list_options =
-		valueNames: ['owner', 'name', 'description', 'watchers', 'forks', 'wiki_text']
+		valueNames: ['owner', 'name', 'description', 'watchers', 'forks', 'wiki_text', 'languages', 'frameworks', 'solutions']
 
 	repoList = new List('repos-list', list_options)
 
-
 	
+	filter_list =
+		"languages": ["ruby", "not:js"]
+		"frameworks": []
+		"solutions": []
+
+	for context, tag_list of filter_list
+		do (context, tag_list) ->
+			for tag in tag_list
+				do (tag) ->
+					repoList.filter (item) ->
+						# console.log item.name
+						# console.log context
+						# console.log tag
+						unless item[context].indexOf(tag) is -1
+							return true
+						else
+							return false
+
 	return true

@@ -1,5 +1,8 @@
 %p Repos Index
 
+
+-# = debug @tags
+
 #repos-list
 	
 	-# list.js search and sort
@@ -23,7 +26,7 @@
 		- @repos.each do |repo|
 			-# repo
 			-# filtrify tags in data-attributes
-			%li(data-languages="#{tag_list(repo.languages)}" data-frameworks="#{tag_list(repo.frameworks)}" data-solutions="#{tag_list(repo.solutions)}")
+			%li
 				-# owner and name
 				%a(href="/repo/#{repo.ident}")
 					%span.owner= repo.owner
@@ -33,9 +36,14 @@
 				-# description
 				%p.description= repo.description
 
+
 				-# watchers and forks (not displayed, only for sorting purposes)
 				%p.watchers(style="display: none")= repo.watchers
 				%p.forks(style="display: none")= repo.forks
+				%p.languages(style="display: none")= repo.languages
+				%p.frameworks(style="display: none")= repo.frameworks
+				%p.solutions(style="display: none")= repo.solutions
+
 
 				-# links (github_url and homepage (if available))
 				%a.github_url(href="#{repo.github_url}") Github &rarr;

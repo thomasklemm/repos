@@ -5,6 +5,8 @@ class RepoController < ApplicationController
   def index
     @repos = Repo.order("watchers DESC")
 
+    @tags = RocketTag::Tag.all
+    
     respond_to do |format|
       format.html #index.html.haml
     end
