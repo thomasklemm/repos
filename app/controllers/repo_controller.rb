@@ -94,7 +94,7 @@ class RepoController < ApplicationController
       # Sanitize unsafe HTML (like script tags)
       # .scrub!(:prune) removes unsafe / unknown tag and their children
       # .to_text preserves whitespace around block level elements
-      wiki_text_new = Loofah.fragment(wiki_text_new).scrub!(:prune).to_s
+      # wiki_text_new = Loofah.fragment(wiki_text_new).scrub!(:prune).to_text
 
       # save the changes
       repo.wiki_text = wiki_text_new
@@ -108,16 +108,16 @@ class RepoController < ApplicationController
       # it's a request updating tags (most likely)
       # each tag_context
       %w{languages frameworks tags}.each do |tag_context|
-        t1 = params[tag_context]
+        tag_values_raw = params[tag_context]
         # split tags
-        t1 = t1.split(",")
+        tag_values_raw = tag_values_raw.split(",")
         tag_values = []
         # each tag
-        t1.each do |value|
+        tag_values_raw.each do |value|
           # clean whitespace
           value = value.strip
-          # do here
-          # sanitize
+          # escape
+          value = Loofah.fragment(value).scrub!(:strip).text
           tag_values << value
         end
         # update repo using update_attribute because save somehow does not cause tags to be saved
