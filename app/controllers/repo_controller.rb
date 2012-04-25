@@ -86,15 +86,22 @@ class RepoController < ApplicationController
     
     # is it tags update or a mercury update request?
     if params["content"]
+
       # it's a mercury request
+      # new wiki text
       wiki_text_new = JSON.parse(params["content"])["wiki_text_edit"]["value"]
 
-      repo.wiki_text = wiki_text_new
+      # sanitize new wiki text
 
+      # save the changes
+      repo.wiki_text = wiki_text_new
       repo.save
 
-      render text: "{}"
+      # mercury waiting for "200" response -> sending empty json string
+      return render text: "{}"
+
     else
+
       # it's a request updating tags (most likely)
       # each tag_context
       %w{languages frameworks tags}.each do |tag_context|
