@@ -16,7 +16,7 @@
 
 	-# list.js search and sort
 	%span#list_js
-		%input.search
+		%input.search(autofocus)
 		%span Sort by
 		-# %span.sort.button(data-sort="name") name
 		%span.sort(data-sort="watchers")watchers
@@ -47,17 +47,15 @@
 					\ /
 					%span.name= repo.name
 
-				-# description
-				%p.description= repo.description
-
 				-# links (github_url and homepage (if available))
 				%a.github_url(href="#{repo.github_url}") Github &rarr;
 				%a.homepage(href="#{homepage_with_fallback_github_url(repo.homepage, repo.github_url)}" style="#{display_homepage?(repo.homepage, repo.github_url)}") Homepage &rarr;
 				-# do later: text homepage durch url ersetzen (evtl. problematisch bei github unterseiten mit langen links)
 
-				-# watchers and forks (not displayed, only for sorting purposes)
-
-				- tag_contexts = %w(languages)
+				-# description
+				%p.description= repo.description
+				
+				-# watchers, forks and tags (not displayed, only for sorting purposes)
 				%p.watchers(style="display: none")= repo.watchers
 				%p.forks(style="display: none")= repo.forks
 				-# tags for list.js indexing (sent twice at the moment)
