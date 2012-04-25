@@ -118,7 +118,7 @@ class RepoController < ApplicationController
           tag_values << value
         end
         # update repo using update_attribute because save somehow does not cause tags to be saved
-        repo.update_attribute(context, tag_values)
+        repo.update_attribute(tag_context, tag_values)
       end
       # do: catch  errors for requests that are neither mercury nor tags
       respond_to do |format|
