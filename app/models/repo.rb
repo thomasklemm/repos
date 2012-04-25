@@ -6,6 +6,9 @@ class Repo < ActiveRecord::Base
 
   validates :owner, :name, presence: true
 
+  # maybe validate uniqueness of repo by owner and name somehow
+  # e.g. before save callback / filters (c)
+
   # repo.ident -> "thomasklemm/repos"
   # => returns a github ident string ('not what it's officially called, is it?')
   def ident

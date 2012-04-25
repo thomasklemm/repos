@@ -3,10 +3,12 @@ class RepoController < ApplicationController
   # index
   # display all repos
   def index
+    # Load all repos, sorted by watchers descending
     @repos = Repo.order("watchers DESC")
     
+    # How many repos are listed?
     @repos_count = @repos.length
-    
+
     respond_to do |format|
       format.html #index.html.haml
     end
@@ -16,6 +18,7 @@ class RepoController < ApplicationController
   # display one repo
   # allow tags to be added
   # display alternatives / options user might want to know about
+  # display repos tagged similar if there are tags
   def show
     @repo = Repo.find_by_owner_and_name(params[:owner], params[:name])
     
@@ -38,17 +41,33 @@ class RepoController < ApplicationController
   def add_repo
     url = params[:url]
 
+    # read owner and name from url
     ident = url.gsub("https://github.com/", "").strip
-    owner = ident.split("/")[0]
-    name = ident.split("/")[1]
+    owner = ident.split("/")[0].strip
+    name = ident.split("/")[1].strip
 
+    # find_or_initialize repo (to ensure that there are no duplicates)
     repo = Repo.find_or_initialize_by_owner_and_name(owner, name)
 
     respond_to do |format|
-      if repo.initialize_repo
-        format.html { redirect_to "/repo/#{repo.ident}/", notice: "Repo added." }
+      # Initialize Repo, including check whether or not it exists on github
+      if repo.new_record?
+        # repo is a new record, up to now unknown
+        if repo.initialize_repo
+          # repo is now in database
+          format.html { redirect_to "/repo/#{repo.ident}/", notice: "Repo '#{repo.ident}' added. What might be good tags for it?." }
+        else
+          # repo did not exist on github
+          format.html { redirect_to :root, notice: "Repo '#{repo.ident}' could not be found on github."}
+        end
       else
-        format.html { redirect_to :root, notice: "Repo not found on github."}
+        # Repo already in database
+        # run an update
+        if repo.initialize_repo
+          format.html { redirect_to "/repo/#{repo.ident}/", notice: "Repo '#{repo.ident}' added. What might be good tags for it?" }
+        else
+          format.html { redirect_to :root, notice: "Repo '#{repo.ident}' could not be found on github."}
+        end
       end
     end
   end
@@ -70,7 +89,6 @@ class RepoController < ApplicationController
       # it's a mercury request
       wiki_text_new = JSON.parse(params["content"])["wiki_text_edit"]["value"]
 
-      puts "New wiki_text for #{repo.ident}: '#{wiki_text_new.inspect}'"
       repo.wiki_text = wiki_text_new
 
       repo.save
@@ -79,8 +97,8 @@ class RepoController < ApplicationController
     else
       # it's a request updating tags (most likely)
       # each tag_context
-      %w{languages frameworks tags}.each do |context|
-        t1 = params[context]
+      %w{languages frameworks tags}.each do |tag_context|
+        t1 = params[tag_context]
         # split tags
         t1 = t1.split(",")
         tag_values = []
