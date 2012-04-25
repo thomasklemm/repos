@@ -1,15 +1,23 @@
 source 'https://rubygems.org'
 
+# thin web server
 gem 'thin'
 
 gem 'rails', '3.2.3'
 
+# haml templating
 gem 'haml-rails'
 
+# curb http client requests
 gem 'curb'
+
+# coffee-script monkey patch line for making mercury work
 gem "coffee-script-source", "1.2.0"
+
+# mercury live editor
 gem 'mercury-rails'
 
+# quiet assets suppresses asset related log messages
 gem 'quiet_assets', :group => :development
 
 # Databases
@@ -24,7 +32,7 @@ group :production do
   gem 'pg'
 end
 
-
+# RocketTag high speed tagging
 gem 'rocket_tag', git: 'git://github.com/bradphelan/rocket_tag.git'
 
 # Gems used only for assets and not required
@@ -39,6 +47,7 @@ group :assets do
   gem 'uglifier', '>= 1.0.3'
 end
 
+# jQuery Rails (Rails 3.1+ default)
 gem 'jquery-rails'
 
 # To use ActiveModel has_secure_password
