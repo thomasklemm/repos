@@ -1,18 +1,28 @@
-%p Repos Index
+%h3 Repos
+%p The easy way for you developers to stumble upon projects/gems/repos that matter your work/projects/...
+%p Discover <strong>#{@repos_count}</strong> repos and counting...
+%br
+%p Structuring the tags:
+%ul
+	%div &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Languages: ruby, javascript, ""
+	%div &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Frameworks: rails, jquery, ""
+	%div &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Tags: get wild, the more the merrier
 
 
--# = debug @tags
 
 #repos_list
 	
-	-# filtrify placeholder
-	#ft_placeholder
+
 
 	-# list.js search and sort
-	%input.search.input-text
-	%span Sort by
-	-# %span.sort.button(data-sort="name") name
-	%span.sort.button(data-sort="watchers")watchers
+	%span#list_js
+		%input.search
+		%span Sort by
+		-# %span.sort.button(data-sort="name") name
+		%span.sort.button(data-sort="watchers")watchers
+
+	-# filtrify placeholder
+	%span#ft_placeholder
 	
 	-# tag controls
 		#tags
@@ -46,8 +56,15 @@
 				-# do later: text homepage durch url ersetzen (evtl. problematisch bei github unterseiten mit langen links)
 
 				-# watchers and forks (not displayed, only for sorting purposes)
+
+				- tag_contexts = %w(languages)
 				%p.watchers(style="display: none")= repo.watchers
 				%p.forks(style="display: none")= repo.forks
+				-# tags for list.js indexing (sent twice at the moment)
+				%p.languages(style="display: none")= tag_list(repo.languages)
+				%p.frameworks(style="display: none")= tag_list(repo.frameworks)
+				%p.tags(style="display: none")= tag_list(repo.tags)
+
 
 				-# wiki_text
 				-# do later: evtl. trunkieren oder gleich nur trunkierte version auslesen, die bei mercury update gespeichert und sanitized wird

@@ -5,6 +5,8 @@ class RepoController < ApplicationController
   def index
     @repos = Repo.order("watchers DESC")
     
+    @repos_count = @repos.length
+    
     respond_to do |format|
       format.html #index.html.haml
     end
@@ -17,7 +19,12 @@ class RepoController < ApplicationController
   def show
     @repo = Repo.find_by_owner_and_name(params[:owner], params[:name])
     
-    @similar_repos = @repo.tagged_similar
+    # only show similarly tagged repos if the repo has been tagged
+    if @repo.taggings != []
+      @similar_repos = @repo.tagged_similar
+    else
+      @similar_repos = []
+    end
     
     respond_to do |format|
       format.html #show.html.haml
