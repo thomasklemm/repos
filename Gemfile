@@ -35,6 +35,9 @@ end
 # RocketTag high speed tagging
 gem 'rocket_tag', git: 'git://github.com/bradphelan/rocket_tag.git'
 
+# Loofah HTML sanitizer based on Nokogiri
+gem 'loofah'
+
 # Gems used only for assets and not required
 # in production environments by default.
 group :assets do
