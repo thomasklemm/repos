@@ -17,7 +17,8 @@
 		close     : false,
 		query     : undefined, // { category : [tags] } }
 		callback  : undefined, // function ( query, match, mismatch ) {}
-		match     : true //show or hide no matches
+		match     : true, // show or hide no matches
+		search    : true // show or hide the search panel
 	}; 
 
 	function Filtrify( containerID, placeholderID, options ) {
