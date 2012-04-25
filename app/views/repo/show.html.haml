@@ -45,9 +45,13 @@
 
 	-# wiki_text
 	%span.wiki_text(id="wiki_text_edit" class="mercury-region" data-type="editable")!= repo.wiki_text
-	%span#edit_link= link_to "Edit", "/editor" + request.path
+	%span#mercury_edit_link= link_to "Edit", "/editor" + request.path
+	%span#mercury_cancel_link(style='display:none')= link_to "Cancel", "/repo/#{repo.ident}"
+	%span#mercury_save_link(style='display:none')= link_to "Save my changes", "#"
 
 -# Repos tagged similarly
+
+-# = debug request
 
 %p These repos are tagged similarly:
 	

@@ -26,7 +26,9 @@
  *
  * Minimum jQuery requirements are 1.7
  * require mercury/dependencies/jquery-1.7
- *= require 'jquery'
+ * 
+ * requiring the jquery placed in same folder 
+ *= require './jquery.min.js'
  *
  * You can include the Rails jQuery ujs script here to get some nicer behaviors in modals, panels and lightviews when
  * using :remote => true within the contents rendered in them.
@@ -387,17 +389,25 @@ window.Mercury = {
   onload: function() {
     //Mercury.PageEditor.prototype.iframeSrc = function(url) { return '/testing'; }
     
+    // Show save link instead of edit link when in Mercury editor mode
     Mercury.on('ready', function() {
-        var link = $('#mercury_iframe').contents().find('#edit_link');
-        // link.hide();
-        // Change link text
-        link.contents().contents().replaceWith("Save wiki_text");
-        link.click(function(event) {
+        // get the elements
+        var edit_link = $('#mercury_iframe').contents().find('#mercury_edit_link');
+        var cancel_link = $('#mercury_iframe').contents().find('#mercury_cancel_link');
+        var save_link = $('#mercury_iframe').contents().find('#mercury_save_link');
+
+        // show save and cancel, hide edit
+        edit_link.hide()
+        cancel_link.show()
+        save_link.show()
+
+        // on click on save_link call page_editor.save()
+        save_link.click(function(event) {
             event.preventDefault();
             page_editor.save();
         });
     });
-    // Redirect on 'saved' event
+    // On 'saved' event redirect to the page that has just been edited
     Mercury.on('saved', function() {
         window.location.href = window.location.href.replace(/\/editor\//i, '/');
       });

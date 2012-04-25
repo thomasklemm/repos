@@ -66,8 +66,8 @@
 
 				-# wiki_text
 				-# do later: evtl. trunkieren oder gleich nur trunkierte version auslesen, die bei mercury update gespeichert und sanitized wird
-				-# darf keinerlei html tags mehr enthalten, für dem moment werden diese hier gestript
-				%p.wiki_text= strip_tags(repo.wiki_text)
+				-# darf keinerlei html tags mehr enthalten, sollte in repo controller beim empfangen von mercury_updates gemacht werden
+				%p.wiki_text= repo.wiki_text
 
 				-# if interesting do later: aktivitätsanzeige
 				-# if interesting do later: watchers anzeige

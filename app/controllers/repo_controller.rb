@@ -91,7 +91,10 @@ class RepoController < ApplicationController
       # new wiki text
       wiki_text_new = JSON.parse(params["content"])["wiki_text_edit"]["value"]
 
-      # sanitize new wiki text
+      # Sanitize unsafe HTML (like script tags)
+      # .scrub!(:prune) removes unsafe / unknown tag and their children
+      # .to_text preserves whitespace around block level elements
+      wiki_text_new = Loofah.fragment(wiki_text_new).scrub!(:strip).text
 
       # save the changes
       repo.wiki_text = wiki_text_new
