@@ -1,5 +1,7 @@
 Repos::Application.routes.draw do
   
+  get "tag/index"
+
   # mercury editor
   # custom mercury controller to allow :name to have dots in it, explanation see below
   match '/editor/repo/:owner/:name' => "my_mercury#edit", :as => :mercury_editor, :constraints => { :name => /[^\/]+(?=\.html\z|\.json\z)|[^\/]+/ }
