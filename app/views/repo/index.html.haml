@@ -3,8 +3,11 @@
 
 -# = debug @tags
 
-#repos-list
+#repos_list
 	
+	-# filtrify placeholder
+	#ft_placeholder
+
 	-# list.js search and sort
 	%input.search.input-text
 	%span Sort by
@@ -12,21 +15,22 @@
 	%span.sort.button(data-sort="watchers")watchers
 	
 	-# tag controls
-	#tags
-		#tags_languages
-			%span Languages:&nbsp;
-		#tags_frameworks
-			%span Frameworks:&nbsp;
-		#tags_tags
-			%span Tags:&nbsp;
+		#tags
+			#tags_languages
+				%span Languages:&nbsp;
+			#tags_frameworks
+				%span Frameworks:&nbsp;
+			#tags_tags
+				%span Tags:&nbsp;
 
 	-# list.js ul
-	%ul.list
+	%ul.list#ft_container
 		-# @repos.each
 		- @repos.each do |repo|
 			-# repo
 			-# filtrify tags in data-attributes
-			%li
+			%li(data-languages="#{tag_list(repo.languages)}" data-frameworks="#{tag_list(repo.frameworks)}" data-tags="#{tag_list(repo.tags)}")
+
 				-# owner and name
 				%a(href="/repo/#{repo.ident}")
 					%span.owner= repo.owner
@@ -36,19 +40,14 @@
 				-# description
 				%p.description= repo.description
 
-
-				-# watchers and forks (not displayed, only for sorting purposes)
-				%p.watchers(style="display: none")= repo.watchers
-				%p.forks(style="display: none")= repo.forks
-				%p.languages(style="display: none")= repo.languages
-				%p.frameworks(style="display: none")= repo.frameworks
-				%p.tags(style="display: none")= repo.tags
-
-
 				-# links (github_url and homepage (if available))
 				%a.github_url(href="#{repo.github_url}") Github &rarr;
 				%a.homepage(href="#{homepage_with_fallback_github_url(repo.homepage, repo.github_url)}" style="#{display_homepage?(repo.homepage, repo.github_url)}") Homepage &rarr;
 				-# do later: text homepage durch url ersetzen (evtl. problematisch bei github unterseiten mit langen links)
+
+				-# watchers and forks (not displayed, only for sorting purposes)
+				%p.watchers(style="display: none")= repo.watchers
+				%p.forks(style="display: none")= repo.forks
 
 				-# wiki_text
 				-# do later: evtl. trunkieren oder gleich nur trunkierte version auslesen, die bei mercury update gespeichert und sanitized wird

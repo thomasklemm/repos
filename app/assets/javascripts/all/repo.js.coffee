@@ -57,8 +57,12 @@ $(document).ready ->
 	###
 		Section: filtrify.js
 	###
+	
+	ft = $.filtrify("ft_container", "ft_placeholder")
+
 	###
 	ft = $.filtrify("filtrifyContainer", "filtrifyPlaceHolder")
+
 
 	contexts = ["languages", "frameworks", "solutions"]
 	for context in contexts
@@ -106,9 +110,9 @@ $(document).ready ->
 	list_options =
 		valueNames: ['owner', 'name', 'description', 'watchers', 'forks', 'wiki_text', 'languages', 'frameworks', 'tags']
 
-	repoList = new List('repos-list', list_options)
+	repoList = new List('repos_list', list_options)
 
-	
+	###
 	filter_list =
 		"languages": ["js", "ruby"]
 		"frameworks": []
@@ -124,5 +128,5 @@ $(document).ready ->
 							return true
 						else
 							return false
-
+	###
 	return true
