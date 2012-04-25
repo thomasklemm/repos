@@ -34,10 +34,10 @@
 				%span.tag_cancel(style='display:none') Cancel
 				%span.tag_save(style='display:none') Save
 
-			.solutions
-				%span Solutions:
-				%span.tag_output #{repo.solutions.join(" | ")}
-				%input#tags_solutions.tag_input(type="text" name="solutions" value="#{repo.solutions.join(',')}" style="display:none")
+			.tags
+				%span Tags:
+				%span.tag_output #{repo.tags.join(" | ")}
+				%input#tags_tags.tag_input(type="text" name="tags" value="#{repo.tags.join(',')}" style="display:none")
 
 				%span.tag_edit Edit
 				%span.tag_cancel(style='display:none') Cancel

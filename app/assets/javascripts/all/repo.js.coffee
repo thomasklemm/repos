@@ -104,7 +104,7 @@ $(document).ready ->
 	###
 
 	list_options =
-		valueNames: ['owner', 'name', 'description', 'watchers', 'forks', 'wiki_text', 'languages', 'frameworks', 'solutions']
+		valueNames: ['owner', 'name', 'description', 'watchers', 'forks', 'wiki_text', 'languages', 'frameworks', 'tags']
 
 	repoList = new List('repos-list', list_options)
 
@@ -112,7 +112,7 @@ $(document).ready ->
 	filter_list =
 		"languages": ["js", "ruby"]
 		"frameworks": []
-		"solutions": []
+		"tags": []
 
 	for context, tag_list of filter_list
 		do (context, tag_list) ->

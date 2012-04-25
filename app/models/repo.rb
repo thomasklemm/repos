@@ -2,7 +2,7 @@ class Repo < ActiveRecord::Base
   attr_accessible :owner, :name, :description, :github_url, :homepage, :forks, :watchers, :last_updated
 
   # contexts / scopes that are taggable
-  attr_taggable :languages, :frameworks, :solutions
+  attr_taggable :languages, :frameworks, :tags
 
   validates :owner, :name, presence: true
 
