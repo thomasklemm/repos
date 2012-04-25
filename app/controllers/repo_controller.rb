@@ -74,7 +74,7 @@ class RepoController < ApplicationController
     else
       # it's a request updating tags (most likely)
       # each tag_context
-      %w{languages frameworks solutions}.each do |context|
+      %w{languages frameworks tags}.each do |context|
         t1 = params[context]
         # split tags
         t1 = t1.split(",")
