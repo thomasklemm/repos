@@ -31,24 +31,24 @@ OTHER DEALINGS IN THE SOFTWARE.
 (function( window, undefined ) {
 "use strict";
 var document = window.document,
-	h;
+    h;
 
 var List = function(id, options, values) {
     var self = this,
-		templater,
-		init,
-		initialItems,
-		Item,
-		Templater,
-		sortButtons,
-		events = {
-		    'updated': []
-		};
+        templater,
+        init,
+        initialItems,
+        Item,
+        Templater,
+        sortButtons,
+        events = {
+            'updated': []
+        };
     this.listContainer = (typeof(id) == 'string') ? document.getElementById(id) : id;
     // Check if the container exists. If not return instead of breaking the javascript
     if (!this.listContainer)
         return;
-    
+
     this.items = [];
     this.visibleItems = []; // These are the items currently visible
     this.matchingItems = []; // These are the items currently matching filters and search, regadlessof visible count
@@ -57,7 +57,7 @@ var List = function(id, options, values) {
 
     this.list = null;
     this.templateEngines = {};
-    
+
     this.page = options.page || 200;
     this.i = options.i || 1;
 
@@ -129,9 +129,20 @@ var List = function(id, options, values) {
             }
         },
         plugins: function(plugins) {
+            var locals = {
+                templater: templater,
+                init: init,
+                initialItems: initialItems,
+                Item: Item,
+                Templater: Templater,
+                sortButtons: sortButtons,
+                events: events,
+                reset: reset
+            };
             for (var i = 0; i < plugins.length; i++) {
+                plugins[i][1] = plugins[i][1] || {};
                 var pluginName = plugins[i][1].name || plugins[i][0];
-                self[pluginName] = new self.plugins[plugins[i][0]](self, plugins[i][1]);
+                self[pluginName] = self.plugins[plugins[i][0]].call(self, locals, plugins[i][1]);
             }
         }
     };
@@ -183,11 +194,11 @@ var List = function(id, options, values) {
         }
     };
 
-	this.show = function(i, page) {
-		this.i = i;
-		this.page = page;
-		self.update();
-	};
+    this.show = function(i, page) {
+        this.i = i;
+        this.page = page;
+        self.update();
+    };
 
     /* Removes object from list.
     * Loops through the list and removes objects where
@@ -336,19 +347,16 @@ var List = function(id, options, values) {
     */
     this.filter = function(filterFunction) {
         self.i = 1; // Reset paging
-        var matching = undefined;
         reset.filter();
         if (filterFunction === undefined) {
             self.filtered = false;
         } else {
-            matching = [];
             self.filtered = true;
             var is = self.items;
             for (var i = 0, il = is.length; i < il; i++) {
                 var item = is[i];
-                if (filterFunction(item.values())) {
+                if (filterFunction(item)) {
                     item.filtered = true;
-                    matching.push(item);
                 } else {
                     item.filtered = false;
                 }
@@ -404,7 +412,7 @@ var List = function(id, options, values) {
 
     this.update = function() {
         var is = self.items,
-			il = is.length;
+            il = is.length;
 
         self.visibleItems = [];
         self.matchingItems = [];
@@ -414,12 +422,12 @@ var List = function(id, options, values) {
                 is[i].show();
                 self.visibleItems.push(is[i]);
                 self.matchingItems.push(is[i]);
-			} else if (is[i].matching()) {
+            } else if (is[i].matching()) {
                 self.matchingItems.push(is[i]);
                 is[i].hide();
-			} else {
+            } else {
                 is[i].hide();
-			}
+            }
         }
         trigger('updated');
     };
@@ -465,7 +473,7 @@ var List = function(id, options, values) {
         this.matching = function() {
             return (
                 (self.filtered && self.searched && item.found && item.filtered) ||
-               	(self.filtered && !self.searched && item.filtered) ||
+                (self.filtered && !self.searched && item.filtered) ||
                 (!self.filtered && self.searched && item.found) ||
                 (!self.filtered && !self.searched)
             );
@@ -535,7 +543,8 @@ List.prototype.templateEngines.standard = function(list, settings) {
         ensure.created(item);
         var values = {};
         for(var i = 0, il = valueNames.length; i < il; i++) {
-            values[valueNames[i]] = h.getByClass(valueNames[i], item.elm)[0].innerHTML;
+            var elm = h.getByClass(valueNames[i], item.elm, true);
+            values[valueNames[i]] = elm ? elm.innerHTML : "";
         }
         return values;
     };
@@ -689,7 +698,7 @@ h = {
     },
     addClass: function(ele, classN) {
         if (!this.hasClass(ele, classN)) {
-            var classes = this.getAttribute(ele, 'class') || this.getAttribute(ele, 'className');
+            var classes = this.getAttribute(ele, 'class') || this.getAttribute(ele, 'className') || "";
             classes = classes + ' ' + classN + ' ';
             classes = classes.replace(/\s{2,}/g, ' ');
             ele.setAttribute('class', classes);
@@ -697,7 +706,7 @@ h = {
     },
     removeClass: function(ele, classN) {
         if (this.hasClass(ele, classN)) {
-            var classes = this.getAttribute(ele, 'class') || this.getAttribute(ele, 'className');
+            var classes = this.getAttribute(ele, 'class') || this.getAttribute(ele, 'className') || "";
             classes = classes.replace(classN, '');
             ele.setAttribute('class', classes);
         }
