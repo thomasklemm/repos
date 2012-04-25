@@ -1,13 +1,3 @@
-/**
- * jQuery Filtrify v0.2
- * Beautiful advanced tag filtering with HTML5 and jQuery
- * http://luis-almeida.github.com/filtrify
- *
- * Licensed under the MIT license.
- * Copyright 2012 Luís Almeida
- * https://github.com/luis-almeida
- */
-
 ;(function ( $, window, document, undefined ) {
 
 	var defaults = {
@@ -15,9 +5,9 @@
 		hide      : true,
 		block     : [],
 		close     : false,
-		query     : undefined, // { category : [tags] } }
-		callback  : undefined, // function ( query, match, mismatch ) {}
-		match     : true //show or hide no matches
+		query     : undefined, // { field1 : [tags] } }
+		callback : undefined, // function ( query, match, mismatch ) {}
+		match: false,//show or hide no matches
 	}; 
 
 	function Filtrify( containerID, placeholderID, options ) {
