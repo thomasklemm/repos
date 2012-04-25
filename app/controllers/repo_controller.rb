@@ -94,7 +94,7 @@ class RepoController < ApplicationController
       # Sanitize unsafe HTML (like script tags)
       # .scrub!(:prune) removes unsafe / unknown tag and their children
       # .to_text preserves whitespace around block level elements
-      wiki_text_new = Loofah.fragment(wiki_text_new).scrub!(:strip).text
+      wiki_text_new = Loofah.fragment(wiki_text_new).scrub!(:prune).to_s
 
       # save the changes
       repo.wiki_text = wiki_text_new

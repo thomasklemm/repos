@@ -67,9 +67,10 @@
 				-# wiki_text
 				-# do later: evtl. trunkieren oder gleich nur trunkierte version auslesen, die bei mercury update gespeichert und sanitized wird
 				-# darf keinerlei html tags mehr enthalten, sollte in repo controller beim empfangen von mercury_updates gemacht werden
-				%p.wiki_text= repo.wiki_text
+				-# trucate maybe on client side using https://github.com/tcorral/Cutter.js or similar library to send about 500 characters. who wants more has to click
+				%p.wiki_text= strip_tags(repo.wiki_text)
 
-				-# if interesting do later: aktivitätsanzeige
+				-# if interesting do later: aktivitätsanzeige, sort by activity
 				-# if interesting do later: watchers anzeige
 
 %p Repos can be added using this very special bookmarklet (best draw it to your browser's bookmarks bar)
