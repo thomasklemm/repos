@@ -14,7 +14,7 @@
 		noresults : "No results match",
 		hide      : true,
 		block     : [],
-		close     : false,
+		close     : true,
 		query     : undefined, // { category : [tags] } }
 		callback  : undefined, // function ( query, match, mismatch ) {}
 		match     : true, // show or hide no matches

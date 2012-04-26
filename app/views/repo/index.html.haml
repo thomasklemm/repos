@@ -19,27 +19,28 @@
 		%input.search(autofocus)
 		%span Sort by
 		-# %span.sort.button(data-sort="name") name
-		%span.sort(data-sort="watchers")watchers
+		%span.sort(data-sort="watchers") watchers
+		%span.sort(data-sort="last_pushed_in_days") current commit
 
+	%br
 	-# filtrify placeholder
-	%span#ft_placeholder
-	
-	-# tag controls
-		#tags
-			#tags_languages
-				%span Languages:&nbsp;
-			#tags_frameworks
-				%span Frameworks:&nbsp;
-			#tags_tags
-				%span Tags:&nbsp;
+	%span#ft_languages_select
+		%span.ft_lang#ft_lang_all.selected(data-languages="all" class="button blue ft-height") All
+		%span.ft_lang(data-languages="ruby" class="button white ft-height") Ruby
+		%span.ft_lang(data-languages="js" class="button white ft-height") JS
+	%span#ft_placeholder(class="button ft-height")
+	-# ft_reset
+	%span#ft_reset Reset filters
 
+	%hr
 	-# list.js ul
 	%ul.list#ft_container
 		-# @repos.each
 		- @repos.each do |repo|
 			-# repo
 			-# filtrify tags in data-attributes
-			%li(data-languages="#{tag_list(repo.languages)}" data-frameworks="#{tag_list(repo.frameworks)}" data-tags="#{tag_list(repo.tags)}")
+			%li{:'data-tags' => tag_list(repo.tags), :'data-languages' => tag_list(repo.languages)}
+
 
 				-# owner and name
 				%a(href="/repo/#{repo.ident}")
@@ -47,22 +48,22 @@
 					\ /
 					%span.name= repo.name
 
-				-# links (github_url and homepage (if available))
-				%a.github_url(href="#{repo.github_url}") Github &rarr;
-				%a.homepage(href="#{homepage_with_fallback_github_url(repo.homepage, repo.github_url)}" style="#{display_homepage?(repo.homepage, repo.github_url)}") Homepage &rarr;
-				-# do later: text homepage durch url ersetzen (evtl. problematisch bei github unterseiten mit langen links)
-
 				-# description
 				%p.description= repo.description
-				
+				-# links (github_url and homepage (if available))
+				%a.github_url(href="#{repo.github_url}" target="_blank") Github
+				%a.homepage(href="#{homepage_with_fallback_github_url(repo.homepage, repo.github_url)}" style="#{display_homepage?(repo.homepage, repo.github_url)}" target="_blank") Homepage
+				-# do later: text homepage durch url ersetzen (evtl. problematisch bei github unterseiten mit langen links)
+				%span.last_updated_in_words Current commit: #{days_ago_in_words(repo.last_updated)}
+
 				-# watchers, forks and tags (not displayed, only for sorting purposes)
 				%p.watchers(style="display: none")= repo.watchers
 				%p.forks(style="display: none")= repo.forks
 				-# tags for list.js indexing (sent twice at the moment)
-				%p.languages(style="display: none")= tag_list(repo.languages)
-				%p.frameworks(style="display: none")= tag_list(repo.frameworks)
-				%p.tags(style="display: none")= tag_list(repo.tags)
-
+				%br
+				%span.languages= tag_list(repo.languages)
+				%span.tags= tag_list(repo.tags)
+				%p.last_pushed_in_days(style="display: none")= days_ago(repo.last_updated)
 
 				-# wiki_text
 				-# do later: evtl. trunkieren oder gleich nur trunkierte version auslesen, die bei mercury update gespeichert und sanitized wird
@@ -72,6 +73,7 @@
 
 				-# if interesting do later: aktivitätsanzeige, sort by activity
 				-# if interesting do later: watchers anzeige
+				%hr
 
 %p Repos can be added using this very special bookmarklet (best draw it to your browser's bookmarks bar)
 

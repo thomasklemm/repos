@@ -51,7 +51,7 @@ class Repo < ActiveRecord::Base
 
       self["github_url"] = github["html_url"]
       self["owner"] = github["owner"]["login"]
-      self["last_updated"] = github["updated_at"]
+      self["last_updated"] = github["pushed_at"]
       self.save
     end
   end

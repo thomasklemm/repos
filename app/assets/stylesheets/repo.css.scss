@@ -4,20 +4,6 @@
 
 p {margin: 0}
 
-.tag {
-	padding: 2px 4px;
-	line-height: 20px;
-	margin-right: 3px
-}
+ul.ft-menu > li.ft-field {margin-right: 7px;}
 
-.tag_unselected {
-	background: #f9f9f9;
-}
-
-.tag_selected {
-	background: #ccc
-}
-
-#ft_reset {
-	background: #ccc
-}
+.ft-height {padding: 5px; font-size: 14px;}

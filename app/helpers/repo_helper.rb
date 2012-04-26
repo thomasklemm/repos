@@ -32,4 +32,25 @@ module RepoHelper
     return tag_array.join(", ")
   end
 
+  # Distance of time in days to now (time)
+  # Return an integer containing the number of days the time given is in the past
+  # 0 marks today, 1 marks yesterday, ...
+  def days_ago(time)
+    distance = ((Time.now - time) / (24*60*60)).floor
+  end
+
+
+  def days_ago_in_words(time)
+    distance = ((Time.now - time) / (24*60*60)).floor
+
+    case distance
+    when 0
+      "today"
+    when 1
+      "yesterday"
+    else
+      "#{distance} days ago" 
+    end
+  end
+
 end

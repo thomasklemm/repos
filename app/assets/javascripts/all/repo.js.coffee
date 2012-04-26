@@ -60,6 +60,34 @@ $(document).ready ->
 	
 	ft = $.filtrify("ft_container", "ft_placeholder")
 
+	# reset filterify
+	$("#ft_reset").click ->
+		$("#ft_lang_all").click()
+		ft.reset()
+
+	# ft query for language when clicking on button
+	$(".ft_lang").click ->
+		langs = []
+		lang = $(this).attr('data-languages')
+		if lang == "all"
+			ft.reset()
+		else	
+			langs.push lang
+			console.log ft.trigger(
+				"languages": langs
+				)
+
+	$(".ft_lang").click ->
+		$(this).addClass("blue").removeClass("white").siblings().removeClass("blue").addClass("white")
+
+
+
+
+	# Hide the languages tab as long as there are only a few
+	$(".ft-menu").children().first().hide()
+	
+
+
 	###
 	ft = $.filtrify("filtrifyContainer", "filtrifyPlaceHolder")
 
@@ -108,7 +136,7 @@ $(document).ready ->
 	###
 
 	list_options =
-		valueNames: ['owner', 'name', 'description', 'watchers', 'forks', 'wiki_text', 'languages', 'frameworks', 'tags']
+		valueNames: ['owner', 'name', 'description', 'watchers', 'forks', 'wiki_text', 'languages', 'frameworks', 'tags', 'last_pushed_in_days']
 
 	repoList = new List('repos_list', list_options)
 
