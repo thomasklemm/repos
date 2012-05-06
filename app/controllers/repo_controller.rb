@@ -8,10 +8,6 @@ class RepoController < ApplicationController
     
     # How many repos are listed?
     @repos_count = @repos.length
-
-    respond_to do |format|
-      format.html #index.html.haml
-    end
   end
 
   # show
@@ -27,10 +23,6 @@ class RepoController < ApplicationController
       @similar_repos = @repo.tagged_similar
     else
       @similar_repos = []
-    end
-    
-    respond_to do |format|
-      format.html #show.html.haml
     end
   end
 
