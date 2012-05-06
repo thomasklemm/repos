@@ -16,18 +16,23 @@ class RepoController < ApplicationController
   # display alternatives / options user might want to know about
   # display repos tagged similar if there are tags
   def show
-    @repo = Repo.find_by_owner_and_name(params[:owner], params[:name])
-    
-    # only show similarly tagged repos if the repo has been tagged
-    if @repo.taggings != []
-      @similar_repos = @repo.tagged_similar
+    begin
+      @repo = Repo.find_by_owner_and_name!(params[:owner], params[:name])
+    rescue ActiveRecord::RecordNotFound
+      # 'Redirect' to add_repo action if the repo is unknown
+      redirect_to "/repo/add?url=https://github.com/#{params[:owner]}/#{params[:name]}"
     else
-      @similar_repos = []
+      # only show similarly tagged repos if the repo has been tagged
+      if @repo.taggings != []
+        @similar_repos = @repo.tagged_similar
+      else
+        @similar_repos = []
+      end
     end
   end
 
   # add_repo
-  # get request to '/add_repo?url=https://github.com/thomasklemm/repos'
+  # get request to '/repo/add?url=https://github.com/thomasklemm/repos'
   #   will add repo to this app
   # in use in bookmarklet
   def add_repo
